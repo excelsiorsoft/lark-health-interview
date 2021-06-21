@@ -4,7 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-// Need to deal with sort order
+
 class Main {
 
 	private static Map<String, Integer> stats = new HashMap<>();
