@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 class Main {
 
 	private static Map<String, Integer> stats = new HashMap<>();
-	private static String[] window = new String[3];
+	private static String[] window = new String[3]; 
 	private static long counter = 0;
 
 	public static void main(String[] args) {
