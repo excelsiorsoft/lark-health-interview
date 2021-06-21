@@ -2,7 +2,7 @@
 
 **Task**
 
-    /* Given a stream of items, represented as one item at a time, be able to print the top 3 occurances at any time within a window of 3 items, ordered by frequency count in 
+Given a stream of items, represented as one item at a time, be able to print the top 3 occurances at any time within a window of 3 items, ordered by frequency count in descending order.
     
           A B B C A
            |_____| // line 14     
