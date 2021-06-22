@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -9,7 +10,7 @@ class Main {
 
 	private static Map<String, Integer> stats = new HashMap<>();
 	private static String[] window = new String[3]; 
-	private static long counter = 0;
+	private static BigInteger counter = BigInteger.ZERO;
 
 	public static void main(String[] args) {
 
@@ -28,7 +29,7 @@ class Main {
 		main.print();
 
 	
-/*		
+/*	
 		main.add("A");
 		main.print();
 		main.add("A");
@@ -87,7 +88,7 @@ class Main {
 		main.print();
 		main.add("K");
 		main.print();
-*/		
+*/	
 	}
 
 	public void print() {
@@ -100,42 +101,38 @@ class Main {
 
 
 	private static void add(String item) {
-		int position = 0;
+		BigInteger position = BigInteger.ZERO;
 		
-		if (0 <= counter && counter < window.length) { //the very first iteration over window length
-			position = (int) counter;
+		if (0 <= counter.intValue() && counter.intValue() < window.length) { //the very first iteration over window length
+			position = counter;
 		} else {									   //all the other iterations over window length
-			position = (int) counter % window.length;
+			position = BigInteger.valueOf(counter.intValue() % window.length);
 			
 			//update statistics
-			String keyToReplace = window[position];
+			String keyToReplace = window[position.intValue()];
 			Integer occOfReplacement = stats.get(keyToReplace);
-			if (occOfReplacement !=null) {
-				if(occOfReplacement.intValue() == 1) {
+			if (occOfReplacement != null) {  		  
+				if(occOfReplacement.intValue() == 1) {//we had a single occurrence of this key
 					stats.remove(keyToReplace);
-				}else {
+				}else {								  //that key has already occurred more than once
 					stats.put(keyToReplace,occOfReplacement-1);
 				}
 			}
 		}
 		
-		window[position] = item;
+		window[position.intValue()] = item;
 		
 		//updated statistics
 		Integer occOfNew = stats.get(item);
-		if (occOfNew == null) {
+		if (occOfNew == null) { //seeing this key first time
 			stats.put(item, 1);
-		} else {
+		} else {				//rest of the occurrences of this key
 			stats.put(item, occOfNew + 1);
 		}
 		
-		//handle edge cases
-		if(counter <= Long.MAX_VALUE-1) {
-			counter++;
-		}else {
-			counter=0;
-			position=0;
-		}
+
+		counter = counter.add(BigInteger.ONE);
+	
 
 		
 	}
