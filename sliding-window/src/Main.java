@@ -102,13 +102,13 @@ class Main {
 	private static void add(String item) {
 		int position = 0;
 		
-		if (0 <= counter && counter < window.length) {
+		if (0 <= counter && counter < window.length) { //the very first iteration over window length
 			position = (int) counter;
-		} else {
+		} else {									   //all the other iterations over window length
 			position = (int) counter % window.length;
 			
+			//update statistics
 			String keyToReplace = window[position];
-			
 			Integer occOfReplacement = stats.get(keyToReplace);
 			if (occOfReplacement !=null) {
 				if(occOfReplacement.intValue() == 1) {
@@ -117,19 +117,19 @@ class Main {
 					stats.put(keyToReplace,occOfReplacement-1);
 				}
 			}
-			
 		}
 		
 		window[position] = item;
 		
+		//updated statistics
 		Integer occOfNew = stats.get(item);
-
 		if (occOfNew == null) {
 			stats.put(item, 1);
 		} else {
 			stats.put(item, occOfNew + 1);
 		}
 		
+		//handle edge cases
 		if(counter <= Long.MAX_VALUE-1) {
 			counter++;
 		}else {
